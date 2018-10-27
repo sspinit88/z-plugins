@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Рекурсивная смена цвета фона и текста</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <!--my styles-->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        /*Общие стили*/
+        *{
+            box-sizing: border-box;
+        }
+
+        html{
+        //overflow-x: hidden;
+        }
+
+        body{
+            margin: 0;
+            padding: 0;
+
+            min-width: 300px;
+        }
+
+        .wrapper{
+        .wrapper();
+        }
+
+        .wrap{
+        .mlr-a();
+        .fz0();
+            max-width: 800px;
+        }
+
+        .ears::after{
+            content: '';
+            display: block;
+            height: 100%;
+            width: 100vw;
+            background-color: inherit;
+            position: absolute;
+            top: 0;
+            z-index: -1;
+            margin: auto;
+            left: -50vw;
+            right: -50vw;
+        }
+
+        img{
+            max-width: 100%;
+            height: auto;
+        }
+
+        ul{
+        .mp0();
+        }
+
+        li{
+            list-style: none;
+        }
+
+        a{
+            text-decoration: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+        h1, h2, h3, h4, h5, h6, p {
+        .mp0();
+        }
+
+        .d-none{
+        .d-none();
+        }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        input, button, textarea{
+            outline: none;
+        }
+
+       /*--------------------------------------------------------------------*/
+
+        .block{
+            margin-top: 20px;
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .block__item{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            max-width: 80px;
+            min-width: 80px;
+            height: 80px;
+
+            margin-top: 40px;
+            margin-bottom: 40px;
+            margin-right: 40px;
+            margin-left: 40px;
+        }
+
+        .block__link{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: white;
+
+            min-height: 100%;
+            min-width: 100%;
+            background-color: #005f00;
+
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+              <ul class="block">
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+            <li class="block__item">
+                <a href="#" class="block__link">
+
+                </a>
+            </li>
+        </ul>
+    </div>
+<!--script-->
+<!--my script-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+    //jQ
+    /*
+    $(function () {
+
+        let items = $('.block__item'),
+            startColor = 0x16a006,
+            counter = 0,
+            timer;
+
+        each();
+
+        function each() {
+
+            let item = items.eq(counter).find('.block__link');
+
+            item.css({
+                'background-color' : '#' + startColor.toString(16)
+            });
+
+            startColor = startColor + 0x000002;
+
+            item.text(startColor.toString(16));
+
+            counter++;
+
+            if(counter == items.length){
+
+                if(timer) clearTimeout(timer);
+
+                counter = 0;
+            }
+
+            timer = setTimeout(each, 300);
+        }
+    }); // load
+    */
+
+    //JS
+    window.addEventListener('load', function () {
+
+        let links = document.querySelectorAll('.block__link'),
+            startColor = 0x16a006,
+            counter = 0,
+            timer;
+
+        each();
+
+        function each() {
+
+            let link = links[counter],
+                linkCss = link.style;
+
+            linkCss.backgroundColor = '#' + startColor.toString(16);
+
+            startColor = startColor + 0x000002;
+
+            link.innerHTML = startColor.toString(16);
+
+            counter++;
+
+            if(counter == links.length){
+
+                if(timer){
+                    clearTimeout(timer);
+                }
+
+                // return false;
+
+                counter = 0;
+            }
+
+            timer = setTimeout(each, 100);
+
+        }
+    }); // load
+
+</script>
+</body>
+</html>

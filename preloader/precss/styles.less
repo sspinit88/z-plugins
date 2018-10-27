@@ -1,0 +1,178 @@
+@import "fonts.less";
+@import "project.less";
+@import "mix.less";
+@import "colors.less";
+@import "smart-grid.less";
+
+
+/*Общие стили*/
+
+*{
+    box-sizing: border-box;
+}
+
+html{
+    overflow-x: hidden;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    min-width: 300px;
+    position: relative;
+}
+
+.wrapper{
+    .wrapper();
+}
+
+.wrap{
+    max-width: 100%;
+    .mlr-a();
+    .fz0();
+}
+
+.ears::after{
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100vw;
+    background-color: inherit;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    margin: auto;
+    left: -50vw;
+    right: -50vw;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+ul{
+    .mp0();
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    .mp0();
+}
+
+.d-none{
+    .d-none();
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/////////////////////////////////////////
+/*----*/
+/////////////////////////////////////////
+
+/*---------------------------preloader--------------------------------*/
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999999;
+
+    background: rgba(9, 12, 52, 1);
+
+    transition: 1s all;
+    opacity: 1;
+    visibility: visible;
+}
+
+.preloader.done {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.preloader__spinner {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.preloader__percents {
+    font-size: 25px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    color: #FDBA0B;
+}
+
+.preloader__animation{
+    width: 150px;
+    height: 150px;
+
+    position: relative;
+
+    animation: spin 7s linear infinite;
+
+    // рисуем дугу
+    &,
+    &:before,
+    &:after {
+        content: ' ';
+        display: block;
+        position: absolute;
+        border: 3px solid transparent;
+        border-top-color: #FDBA0B;
+        border-radius: 50%;
+    }
+
+    &:before {
+        top: 13px;
+        left: 13px;
+        right: 13px;
+        bottom: 13px;
+        border-top-color: #C22229;
+
+        animation: spin 3.5s linear infinite;
+    }
+
+    &:after{
+        top: 5px;
+        left: 5px;
+        right: 5px;
+        bottom: 5px;
+        border-top-color: #006A42;
+
+        animation: spin 6s linear infinite;
+    }
+
+}
+
+@keyframes spin {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}

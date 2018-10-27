@@ -1,0 +1,165 @@
+/*Тут приведены быстрые решения*/
+/////////////////////////////////////////////////////////////////////////////
+
+/*--№--"Уши" для блока (добавлять н/у класс)--*/
+/*
+"Уши добавляются псевдоэлементом к блоку с контентом, принимают цвет родительского блока.
+Растягиваются на весь экран до и после родительского блока"
+Для исключения появления горизонтальной прокрутки необходимо добавить 'overflow-x: hidden;' для <html>
+*/
+html{
+    overflow-x: hidden;
+}
+/*Класс самих ушей*/
+.ears::after{
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100vw;
+    background-color: inherit;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    margin: auto;
+    left: -50vw;
+    right: -50vw;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+
+/*--№--Центрированная картинка--*/
+/*для блока с картинкой*/
+
+.classImg{
+    width: 211px;
+    min-height: 179px;
+    text-align: center;
+    font-size: 0;
+    line-height: 179px;
+    img{
+        vertical-align: middle;
+        margin: 0;
+        max-height: 100%;
+    }
+    &:after{
+        content: ".";
+    }
+}
+
+
+/////////////////////////////////////////////////////////////////
+
+/*--№--Редактируем цвет текста placeholder в INPUT--*/
+input{
+    &::placeholder {
+        color: red;
+        opacity: 1;
+    }
+    &:-moz-placeholder {
+        color: red;
+        opacity: 1;
+    }
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: red;
+        opacity: 1;
+    }
+    &:-ms-input-placeholder { /* IE 10+ */
+        color: red;
+        opacity: 1;
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+        color: red;
+        opacity: 1;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////
+
+/*--№--Редактируем цвет текста placeholder в TEXTAREA--*/
+
+textarea::placeholder {
+    color: red;
+    opacity: 1;
+}
+textarea:-moz-placeholder {
+    color: red;
+    opacity: 1;
+}
+textarea::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: red;
+    opacity: 1;
+}
+textarea:-ms-input-placeholder { /* IE 10+ */
+    color: red;
+    opacity: 1;
+}
+textarea:-moz-placeholder { /* Firefox 18- */
+    color: red;
+    opacity: 1;
+}
+
+////////////////////////////////////////////////////////////////////////////
+
+/*--№--Скрытие "Крестика в поле поика"--*/
+
+/*Первое решение*/
+input[type=text]::-ms-clear {  display: none; width : 0; height: 0; }
+input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
+
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration { display: none; }
+
+/*Второе решение*/
+input[type=text]::-ms-clear {  display: none; width : 0; height: 0; }
+input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+/*В IE10*/
+input::-ms-clear {
+    display: none;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+/*--№--Стили только для Firefox--*/
+@-moz-document url-prefix() {
+    p {
+        color: #f00;
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////
+
+/*--№--Кастомизация Slick-Slider--*/
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+/*--№----*/
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+/*--№----*/
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+/*--№----*/
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+/*--№----*/
+
+//.to(1000px,{
+//
+//});
+//.to(680px,{
+//
+//});

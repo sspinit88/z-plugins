@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>asynchronyJS</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <!--my styles-->
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+<body>
+
+
+<!--script-->
+<!--my script-->
+<script>
+    window.addEventListener('load', function () {
+
+
+        let url1 = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Android_Pay_logo.svg/300px-Android_Pay_logo.svg.png',
+            url2 = 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Nederlands_verkeersbord_E1.svg/300px-Nederlands_verkeersbord_E1.svg.png',
+            url3 = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Facebook_Home_logo.svg/300px-Facebook_Home_logo.svg.png';
+
+
+        function loadImg(url) {
+
+            return new Promise(function (resolve, reject) {
+
+                let img = new Image(200);
+
+                document.body.appendChild(img);
+                img.src = url;
+
+                img.addEventListener('load', function () {
+                    resolve();
+                });
+                img.addEventListener('error', () => {
+                    reject();
+                })
+
+            })
+        } // loadImg
+
+
+        loadImg(url1).then(() => {
+
+            return loadImg(url2);
+
+        }, () => {
+            console.log('картинка 1 не загружается!');
+        })
+            .then(() => {
+
+                return loadImg(url3);
+
+            })
+            .then(() => {
+                console.log('Все картинки загружены');
+            })
+            .catch(function () {
+                console.log('не все картинки загружены');
+            });
+
+
+        /*разрешает , когда все картинки будут загружены*/
+        /*
+        Promise.all([
+            loadImg(url1),
+            loadImg(url2),
+            loadImg(url3),
+        ]).then(()=>{
+            console.log('Все картинки загружены');
+        })
+        */
+
+
+        /*
+        Три состояния Promise:
+
+        - ожидание (pending / waiting) << состояние по умолчанию;
+        - успешно (fulfilled / resolved) - resolved();
+        - неудачно (rejected / failed) - rejected();
+
+        Особенности:
+        - очередь (fulfilledQueue = []) - это список функций, переданный в then.
+        then выполняются в порядке добавления.
+
+        then принимает две функции, первая - всегда resolved(), вторая - rejected(), то есть реакция на ошибку.
+        Также, вместо того, что бы каждый раз указывать в then вторую функцию, в конце кода можно просто прописать  .catch()
+        */
+
+
+        /*
+        console.log('before p');
+
+          let p = new Promise(function (resolve, reject) {
+
+              console.log('in p');
+
+              setTimeout(function () {
+                  resolve();
+                  console.log('in Timeout');
+              }, 3000)
+          });
+
+          p.then(function () {
+              console.log('прошло 3c');
+          });
+
+          console.log('after p');
+          */
+
+
+    });
+</script>
+</body>
+</html>

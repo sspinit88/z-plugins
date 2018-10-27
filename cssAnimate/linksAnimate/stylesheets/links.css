@@ -1,0 +1,95 @@
+/* Styles for the links */
+
+a {
+    text-decoration: none;
+
+    position: relative;
+    display: inline-block;
+
+    color: #2f56b0;
+    transition: color .4s ease;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #478DFB;
+}
+
+a::after{
+    content: '';
+    border-top: .1em solid blue;
+    position: absolute;
+    right: 100%;
+    bottom: 0.14em;
+    left: 0;
+    border-radius: 1em;
+    transition: right .4s cubic-bezier(0, .5, 0, 1),
+                border-color .4s ease;
+}
+
+a:hover::after{
+    border-color: #478DFB;
+    animation: anchor-underline 2s cubic-bezier(0, .5, 0, 1) infinite;
+}
+/*------------------------------------*/
+/*всплывающая подсказка*/
+.title-tooltip {
+    background: rgba(225, 225, 225, .9);
+    border: 2px solid #478DFB;
+    font-size: .7em;
+    padding: .25em .5em;
+    position: absolute;
+    bottom: 2em;
+    left: calc(50% - 8em);
+    text-align: center;
+    width: 16em;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-.3em);
+    transition: visibility 0s .5s,
+                opacity .2s ease-out,
+                transform .5s cubic-bezier(0,1,.5,1);
+}
+
+.title-tooltip::after{
+    content: '';
+    border-color: #478DFB transparent;
+    border-style: solid;
+    border-radius: 0;
+    border-width: .2em .2em 0 .2em;
+    position: absolute;
+    bottom: -.2em;
+    left: calc(100% - 8em);
+    width: 0;
+}
+
+.anchor-tooltip:hover .title-tooltip {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+    transition: opacity .2s ease-out,
+                transform .5s cubic-bezier(0,1,.5,1);
+}
+
+/*------------------------------------*/
+@keyframes anchor-underline {
+    0%, 10%{
+        left: 0;
+        right: 100%;
+    }
+    40%, 60%{
+        left: 0;
+        right: 0;
+
+    }
+    90%, 100%{
+        left: 100%;
+        right: 0;
+    }
+}
+
+
+
+
+

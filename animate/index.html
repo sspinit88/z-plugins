@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>анимированное появление эл-ов</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <!--my styles-->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        /*Общие стили*/
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            /*overflow-x: hidden;*/
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+
+            min-width: 300px;
+        }
+
+        .wrap {
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 0;
+            max-width: 100%;
+        }
+
+        .ears::after {
+            content: '';
+            display: block;
+            height: 100%;
+            width: 100vw;
+            background-color: inherit;
+            position: absolute;
+            top: 0;
+            z-index: -1;
+            margin: auto;
+            left: -50vw;
+            right: -50vw;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+        h1, h2, h3, h4, h5, h6, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        input, button, textarea {
+            outline: none;
+        }
+
+        /*--------------------------------------------------------------------*/
+
+        .one {
+            width: 100%;
+            min-height: 100vh;
+            background: #005f00;
+        }
+
+        .two {
+            width: 100%;
+            min-height: 100vh;
+            background: #005f70;
+
+            text-align: center;
+            padding-top: 200px;
+        }
+
+        .btn {
+
+            width: 500px;
+            min-height: 200px;
+
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+
+            font-size: 20px;
+            font-family: Arial, sans-serif;
+
+        }
+
+        .three {
+            width: 100%;
+            min-height: 100vh;
+            background: #009f70;
+
+            text-align: center;
+            padding-top: 400px;
+        }
+
+        .four {
+            width: 100%;
+            min-height: 100vh;
+            background: #005f70;
+
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        /*----------------------------animate---------------------------------*/
+
+        .animate {
+            opacity: 0;
+            position: relative;
+        }
+
+        .toRight {
+            animation: toRight 1s;
+            animation-fill-mode: forwards;
+        }
+
+        .toLeft {
+            animation: toLeft 1s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes toLeft {
+            from {
+                opacity: 0;
+                left: -200px;
+            }
+
+            to {
+                opacity: 1;
+                left: 0;
+            }
+        }
+
+        @keyframes toRight {
+            from {
+                opacity: 0;
+                right: -200px;
+            }
+
+            to {
+                opacity: 1;
+                right: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<!--<div class="fix" style="display: block; position: fixed; width: 100%; height: 253px; background: #000;"></div>-->
+<div class="wrap">
+    <div class="one">
+
+    </div>
+    <div class="two">
+        <button class="btn  animate" data-animate='toRight'>
+            Какой-то элемент
+        </button>
+    </div>
+    <div class="three">
+        <button class="btn  animate" data-animate='toLeft'>
+            Какой-то элемент
+        </button>
+    </div>
+    <div class="four">
+
+    </div>
+</div>
+<!--script-->
+<!--my script-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+    //jQuery
+    /**/
+    $(function () {
+
+        let animateCss = (function () {
+
+            let checkDistance = function (scrollTop, elem) {
+                //расстояние от верхнего края документа до элемента
+                let offset = elem.offset().top;
+                // 1/3 высоты окна
+                let windowMargin = Math.ceil($(window).innerHeight() / 3);
+                //верхняя граница элемента
+                let topBorder = offset - scrollTop - windowMargin;
+                //нижняя граница элемента
+                let bottomEdge = elem.outerHeight(true) + offset;
+                //расстояние до границы верхней трети окна
+                let bottomBorder = scrollTop + windowMargin - bottomEdge;
+                //если оба значения имеют '-', то элемент виден, как только 1-о, то анимацию прекращаем
+                //console.log(topBorder, bottomBorder);
+                return topBorder <= 0 && bottomBorder <= 0;
+
+            };
+
+            let animationAction = {
+
+                toRight: function () {
+                    $(this).addClass('toRight');
+                },
+
+                toLeft: function () {
+                    $(this).addClass('toLeft');
+                }
+
+            };
+
+            return {
+                init: function () {
+
+                    let scrollTop = $(window).scrollTop(),
+                        elems = $('.animate');
+
+                    elems.each(function () {
+
+                        $this = $(this);
+
+                        if (checkDistance(scrollTop, $this)) {
+
+                            let animationType = $this.data('animate');
+                            animationAction[animationType].call($this);
+
+                        }
+                    })
+                } // init
+            }
+
+        }()); // animateCss
+
+        $(window).on('scroll', function () {
+
+            animateCss.init();
+
+
+        }); // scroll
+
+        animateCss.init();
+
+
+    }); // load
+    /**/
+
+    /*-------------------------------------------------------------------------------------------------------------------*/
+
+    //JS
+    /*
+    window.addEventListener('load', function () {
+
+        window.addEventListener('scroll', function () {
+
+            animateCss.init();
+
+        }); // scroll
+
+        let animateCss = (function () {
+
+
+
+            // метод рассчитывает положение элемента
+            let checkDistance = function (scrollTop, elem) {
+                //расстояние от верхнего края документа до элемента
+                // getBoundingClientRect возвращает позицию элемента относительно окна, а не документа, поэтому нужно добавлять значение прокрутки
+                let offset = elem.getBoundingClientRect().top + window.pageYOffset,
+                // 1/3 высоты окна +
+                    windowMargin = Math.ceil(window.innerHeight / 3),
+                //верхняя граница элемента
+                    topBorder = offset - scrollTop - windowMargin,
+                //нижняя граница элемента
+                    bottomEdge = elem.getBoundingClientRect().bottom + window.pageYOffset,
+                //расстояние до границы верхней трети окна
+                    bottomBorder = scrollTop + windowMargin - bottomEdge;
+                //если оба значения имеют '-', то элемент виден, как только 1-о, то анимацию прекращаем
+//                console.log(topBorder, bottomBorder);
+                    return topBorder <= 0 && bottomBorder <= 0;
+
+            }; // checkDistance
+
+            let animationAction = {
+
+                toRight : function () {
+                    this.classList.add('toRight');
+                },
+                toLeft : function () {
+                    this.classList.add('toLeft');
+                },
+
+            };
+
+            return {
+                init : function () {
+                    let scrollTop = window.pageYOffset;
+                    let elem = document.querySelectorAll('.animate');
+
+                    for (let i = 0; i < elem.length; i++ ){
+                        let that = elem[i];
+
+                        if(checkDistance(scrollTop, that)){
+
+                            let animationType = that.getAttribute('data-animate');
+                            animationAction[animationType].call(that);
+
+                        }
+
+                    }
+
+                }, // init
+            }
+
+        }()); // animateCss
+
+        animateCss.init();
+
+    }); // load
+  /**/
+</script>
+</body>
+</html>
